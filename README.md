@@ -4,11 +4,11 @@ MySQL必知必会读书记录
 读《MySQL必知必会》遇到的问题一(环境问题以及数据源问题)
 https://mp.weixin.qq.com/s/GhrZ3aq3bgX51ZT5kBA5Hg
 
-#第4章 检索数据
-##4.1 selcet语句
-##4.2 检索单个列
+# 第4章 检索数据
+## 4.1 selcet语句
+## 4.2 检索单个列
 select prod_name from products;
-##4.3 检索多个列
+## 4.3 检索多个列
 select prod_id,prod_name,prod_price from products;
 ##4.4 检索所有的列
 select * from products;
@@ -283,7 +283,7 @@ select avg(distinct prod_price) as avg_price from products where vend_id = 1003;
 select count(*) as num_items,
           min(prod_price) as price_min,
           max(prod_price) as price_max,
-          avg(prod_price) as price_avg 
+          avg(prod_price) as price_avg
 from products;
 
 第13章  分组数据
@@ -306,10 +306,10 @@ select vend_id,count(*) as num_prods from products group by vend_id having count
 
         order by                            group by
        排序产生的输出                     分组行。但输出可能不是分组的顺序
-       
+
       任意列都可以使用                    只可能使用选择列或表达式列，而且必须使用
     (甚至非选择的列也可以使用)            每个选择列表达式
-    
+
         不一定需要                         如果与聚集函数一起使用列（或表达式），则必须使用
 
 select order_num,sum(quantity*item_price) as ordertotal from orderitems group by order_num having sum(quantity*item_price) >= 50;
