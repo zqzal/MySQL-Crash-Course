@@ -1,6 +1,8 @@
 # MySQL-Crash-Course
 MySQL必知必会读书记录
 
+读《MySQL必知必会》遇到的问题一(环境问题以及数据源问题)
+https://mp.weixin.qq.com/s/GhrZ3aq3bgX51ZT5kBA5Hg
 
 第4章 检索数据
 4.1 selcet语句
@@ -16,7 +18,7 @@ select vend_id from products;
 select distinct vend_id from products; (检索出不同值的列表)
 
 4.6 限制结果
-select prod_name from products limit 5; 
+select prod_name from products limit 5;
 
 select prod_name from products limit 5,5;
 
@@ -185,7 +187,7 @@ select vend_name,Upper(vend_name) as vend_name_upcase from vendors order by vend
 Left() 返回串左边的字符
 Length() 返回串的长度
 Locate() 找出串的一个字串
-Lower() 将串转换为小写 
+Lower() 将串转换为小写
 LTrim() 去掉串左边的空格
 Right() 返回串右边的字符
 RTrim() 去掉串右边的空格
@@ -220,6 +222,3 @@ Year()   返回一个日期的年份部分
 
 
 11.2.3 数值处理函数
-
-
-
