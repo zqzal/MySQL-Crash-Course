@@ -304,10 +304,12 @@ select vend_id,count(*) as num_prods from products group by vend_id having count
 
 13.4 分组和排序
 
-        order by                  group by
-     排序产生的输出           分组行。但输出可能不是分组的顺序
-  任意列都可以使用                    只可能使用选择列或表达式列，而且必须使用
-  (甚至非选择的列也可以使用)    每个选择列表达式
+        order by                            group by
+       排序产生的输出                     分组行。但输出可能不是分组的顺序
+       
+      任意列都可以使用                    只可能使用选择列或表达式列，而且必须使用
+    (甚至非选择的列也可以使用)            每个选择列表达式
+    
         不一定需要                         如果与聚集函数一起使用列（或表达式），则必须使用
 
 select order_num,sum(quantity*item_price) as ordertotal from orderitems group by order_num having sum(quantity*item_price) >= 50;
