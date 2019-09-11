@@ -125,19 +125,19 @@
 `select vend_name from vendors where vend_name regexp '\\.' order by vend_name;`
 
 ### 9.2.6 匹配字符类
-(```)
-[:alnum:] 任意字母和数字（同[a-z A-Z 0-9]）
-[:alpha:] 任意字符(同[a-z A-Z])
-[:blank:] 空格和制表(同[\\t])
-[:cntrl:] ASCII控制字符(ASCII 0到31和127)
-[:digit:] 任意数字(同[0-9])
-[:graph:] 与[:print:]相同，但不包括空格
-[:lower:] 任意小写字母 (同[a-z])
-[:print:] 任意可打印字符
-[:punct:] 既不在[:alunm:]又不在[:cntrl:]中的任意字符
-[:space:] 包括空格在内的任意空白字符 (同[\\f \\n \\r \\t \\v])
-[:xdight:] 任意十六进制数字 (同[a-f A-F 0-9])
-(```)
+
+* [:alnum:] 任意字母和数字（同[a-z A-Z 0-9]）
+* [:alpha:] 任意字符(同[a-z A-Z])
+* [:blank:] 空格和制表(同[\\t])
+* [:cntrl:] ASCII控制字符(ASCII 0到31和127)
+* [:digit:] 任意数字(同[0-9])
+* [:graph:] 与[:print:]相同，但不包括空格
+* [:lower:] 任意小写字母 (同[a-z])
+* [:print:] 任意可打印字符
+* [:punct:] 既不在[:alunm:]又不在[:cntrl:]中的任意字符
+* [:space:] 包括空格在内的任意空白字符 (同[\\f \\n \\r \\t \\v])
+* [:xdight:] 任意十六进制数字 (同[a-f A-F 0-9])
+
 ### 9.2.7 匹配多个实例
 `select prod_name from products where prod_name regexp '\\([0-9] sticks?\\)' order by prod_name;`
 
