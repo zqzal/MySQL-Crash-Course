@@ -227,4 +227,100 @@ select cust_id,order_num from orders where Time(order_date) = '00:00:00';
 select * from orders where Date(order_date) >= '2005-09-01';
 
 select cust_id,order_num from orders where Date(order_date) between '2005-09-01' and '2005-09-30';
+
+select cust_id,order_num from orders where year(order_date) = 2005 and month(order_date) = 9;
 ##11.2.3 数值处理函数
+Abs()  返回一个数的绝对值
+Cos()  返回一个角度的余弦
+Exp()  返回一个数的指数值
+Mod() 返回除操作的余数
+Pi()     返回圆周率
+Rand() 返回一个随机数
+Sin()  返回一个角度的正弦
+Sqrt() 返回一个数的平方根
+Tan()  返回一个角度的正切
+
+第12章  汇总数据
+
+12.1 聚集函数 (aggregate function) 运行在行组上，计算和返回单个值的函数
+AVG()  返回某个列的平均值
+COUNT() 返回某列的行数
+MAX() 返回某列的最大值
+MIN() 返回某列的最小值
+SUM() 返回某列值之和
+
+12.1.1 AVG() 函数
+
+select AVG(prod_price) as avg_price from products;
+
+select avg(prod_price) as avg_price from products where vend_id = 1003;
+
+12.1.2 COUNT()函数
+
+select count(*) as num_cust from customers;
+
+select count(cust_email) as num_cust from customers;
+
+
+12.1.3 MAX()函数
+
+select max(prod_price) as max_price from products;
+
+12.1.4 MIIN()函数
+
+select min(prod_price) as min_price from products;
+
+12.1.5 SUM()函数
+
+select sum(quantity) as items_ordered from orderitems where order_num = 20005;
+
+select sum(item_price*quantity) as total_price from orderitems where order_num = 20005;
+
+12.2 聚集不同值
+select avg(distinct prod_price) as avg_price from products where vend_id = 1003;
+
+12.3 组合聚集函数
+select count(*) as num_items,
+          min(prod_price) as price_min,
+          max(prod_price) as price_max,
+          avg(prod_price) as price_avg 
+from products;
+
+第13章  分组数据
+
+13.1 数据分组
+select count(*) as num_prods from products where vend_id = 1003;
+
+13.2 创建分组
+select vend_id,count(*) as num_prods from products group by vend_id;
+
+13.3 过滤分组
+
+select cust_id,count(*) as orders from orders group by cust_id having count(*) >= 2;
+
+select vend_id,count(*) as num_prods from products where prod_price >= 10 group by vend_id having count(*) >= 2;
+
+select vend_id,count(*) as num_prods from products group by vend_id having count(*) >= 2;
+
+13.4 分组和排序
+
+        order by                  group by
+     排序产生的输出           分组行。但输出可能不是分组的顺序
+  任意列都可以使用                    只可能使用选择列或表达式列，而且必须使用
+  (甚至非选择的列也可以使用)    每个选择列表达式
+        不一定需要                         如果与聚集函数一起使用列（或表达式），则必须使用
+
+select order_num,sum(quantity*item_price) as ordertotal from orderitems group by order_num having sum(quantity*item_price) >= 50;
+
+select order_num,sum(quantity*item_price) as ordertotal from orderitems group by order_num having sum(quantity*item_price) >= 50 order by ordertotal;
+
+13.5  select子句顺序
+
+        子句               说明               是否必须使用
+       select        要返回的列或表达式             是
+       from          从中检索数据的表              仅在从表选择数据时使用
+       where         行级过滤                     否
+       group by      分组说明                 仅在按组计算聚集时使用
+       having        组级过滤                     否
+       order by      输出排序顺序                  否
+       limit         要检索的行数                  否
