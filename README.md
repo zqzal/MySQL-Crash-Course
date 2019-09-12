@@ -37,8 +37,8 @@
 
 `select prod_price from products order by prod_price desc limit 1;`
 
-`order by字句的位置：在给出order by子句时，应该保证它位于from子句之后。如果使用limit，它必须位于order by
-之后。使用子句的次序不对将产生错误信息。`
+* order by字句的位置：在给出order by子句时，应该保证它位于from子句之后。如果使用limit，它必须位于order by
+之后。使用子句的次序不对将产生错误信息。
 
 # 第6章 过滤数据
 ## 6.1使用where子句
@@ -71,8 +71,8 @@
 
 # 第7章 数据过滤
 ## 7.1 组合where子句
-第6章中 介绍的所有where子句在过滤数据时使用的都是单一的条件。为了进行更强的过滤控制，Mysql允许给出多个where子句。
-这些子句可以两种方式使用：以and子句的方式或or子句的方式使用。
+* 第6章中 介绍的所有where子句在过滤数据时使用的都是单一的条件。为了进行更强的过滤控制，Mysql允许给出多个where子句。
+* 这些子句可以两种方式使用：以and子句的方式或or子句的方式使用。
 ### 7.1.1 and操作符
 `select prod_id,prod_price,prod_name from products where vend_id = 1003 and prod_price <= 10;`
 ### 7.1.2 or操作符
@@ -84,11 +84,11 @@
 `select prod_name,prod_price from products where vend_id in (1002,1003) order by prod_name;`
 
 `select prod_name,prod_price from products where vend_id = 1002 or vend_id = 1003 order by prod_name;`
-`in where子句中用来指定要匹配值的清单的关键字，功能与or相当`
+* in where子句中用来指定要匹配值的清单的关键字，功能与or相当
 
 ## 7.3 not操作符
 `select prod_name,prod_price from products where vend_id not in (1002,1003) order by prod_name;`
-`mysql中的not  mysql支持使用not对in、between和exists子句中取反，这与多数其他DBMS允许使用NOT对各种各样取反右很大的差别`
+* mysql中的not  mysql支持使用not对in、between和exists子句中取反，这与多数其他DBMS允许使用NOT对各种各样取反右很大的差别
 
 # 第8章 用通配符进行过滤
 
@@ -148,7 +148,7 @@
 `select prod_name from products where prod_name regexp '[0-9][0-9][0-9][0-9]' order by prod_name;`
 
 ### 9.2.8 定位符
-^ 文本的开始  $ 文本的结尾  [[:<:]] 词的开始   [[:>:]] 词的结尾
+* ^ 文本的开始  $ 文本的结尾  [[:<:]] 词的开始   [[:>:]] 词的结尾
 `select prod_name from products where prod_name regexp '^[0-9\\.]' order by prod_name;`
 
 
@@ -160,8 +160,8 @@ like匹配整个串而regexp匹配子串
 
 ## 10.2 拼接字段
 `select Concat(vend_name,' (',vend_country,')') from vendors order by vend_name;`
-Concat()拼接串，即把多个串连接起来形成一个较长的串。
-Concat()需要一个或多个指定的串，各个串之间用逗号分隔。
+* Concat()拼接串，即把多个串连接起来形成一个较长的串。
+* Concat()需要一个或多个指定的串，各个串之间用逗号分隔。
 
 `select Concat(vend_name,' (',vend_country,')') as vend_title from vendors order by vend_name;`
 
@@ -184,41 +184,44 @@ Concat()需要一个或多个指定的串，各个串之间用逗号分隔。
 ### 11.2.1 文本处理函数
 
 `select vend_name,Upper(vend_name) as vend_name_upcase from vendors order by vend_name;`
-(```)
-常用的文本处理函数
-Left() 返回串左边的字符
-Length() 返回串的长度
-Locate() 找出串的一个字串
-Lower() 将串转换为小写
-LTrim() 去掉串左边的空格
-Right() 返回串右边的字符
-RTrim() 去掉串右边的空格
-Soundex() 返回串的SOUNDEX值
-SubString() 返回字串的字符
-Upper() 将串转换为大写
-(```)
+
+#### 常用的文本处理函数
+* Left() 返回串左边的字符
+* Length() 返回串的长度
+* L ocate() 找出串的一个字串
+* Lower() 将串转换为小写
+* LTrim() 去掉串左边的空格
+* Right() 返回串右边的字符
+* RTrim() 去掉串右边的空格
+* Soundex() 返回串的SOUNDEX值
+* SubString() 返回字串的字符
+* Upper() 将串转换为大写
+
 `select cust_name,cust_contact from customers where soundex(cust_contact) = soundex('Y Lie');`
 
 ## 11.2.2 日期和时间处理函数
-(```)
-AddDate() 增加一个日期（天、周等）
-AddTime() 增加一个时间（时、分等）
-CurDate() 返回当前日期
-CurTime() 返回当前时间
-Date()    返回日期时间的日期部分
-DateDiff() 计算两个日期之差
-Date_Add()高度灵活的日期运算函数
-Date_Format() 返回一个格式化的日期或时间串
-Day()     返回一个日期的天数部分
-Dayofweek() 对于一个日期，返回对应的星期几
-Hour()    返回一个小时的小部分
-Minute()  返回一个时间的分钟部分
-Month()   返回一个日期的月份部分
-Now()    返回当前日期的时间
-Second() 返回一个时间的秒部分
-Time()   返回一个时间的时间部分
-Year()   返回一个日期的年份部分
-(```)
+
+* AddDate() 增加一个日期（天、周等）
+* AddTime() 增加一个时间（时、分等）
+* CurDate() 返回当前日期
+* CurTime() 返回当前时间
+* Date()    返回日期时间的日期部分
+* DateDiff() 计算两个日期之差
+* Date_Add()高度灵活的日期运算函数
+* Date_Format() 返回一个格式化的日期或时间串
+* Day()     返回一个日期的天数部分
+* Dayofweek() 对于一个日期，返回对应的星期几
+* Hour()    返回一个小时的小部分
+* Minute()  返回一个时间的分钟部分
+* Month()   返回一个日期的月份部分
+* Now()    返回当前日期的时间
+* Second() 返回一个时间的秒部分
+* Time()   返回一个时间的时间部分
+* Year()   返回一个日期的年份部分
+
+
+
+
 `select cust_id,order_num from orders where order_date = '2005-09-01';`
 
 `select cust_id,order_num from orders where Date(order_date) = '2005-09-01';`
@@ -232,27 +235,27 @@ Year()   返回一个日期的年份部分
 
 `select cust_id,order_num from orders where year(order_date) = 2005 and month(order_date) = 9;`
 ## 11.2.3 数值处理函数
-(```)
-Abs()  返回一个数的绝对值
-Cos()  返回一个角度的余弦
-Exp()  返回一个数的指数值
-Mod() 返回除操作的余数
-Pi()     返回圆周率
-Rand() 返回一个随机数
-Sin()  返回一个角度的正弦
-Sqrt() 返回一个数的平方根
-Tan()  返回一个角度的正切
-(```)
+
+* Abs()  返回一个数的绝对值
+* Cos()  返回一个角度的余弦
+* Exp()  返回一个数的指数值
+* Mod() 返回除操作的余数
+* Pi()     返回圆周率
+* Rand() 返回一个随机数
+* Sin()  返回一个角度的正弦
+* Sqrt() 返回一个数的平方根
+* Tan()  返回一个角度的正切
+
 # 第12章  汇总数据
 
 ## 12.1 聚集函数 (aggregate function) 运行在行组上，计算和返回单个值的函数
-(```)
-AVG()  返回某个列的平均值
-COUNT() 返回某列的行数
-MAX() 返回某列的最大值
-MIN() 返回某列的最小值
-SUM() 返回某列值之和
-(```)
+
+* AVG()  返回某个列的平均值
+* COUNT() 返回某列的行数
+* MAX() 返回某列的最大值
+* MIN() 返回某列的最小值
+* SUM() 返回某列值之和
+
 ## 12.1.1 AVG() 函数
 
 `select AVG(prod_price) as avg_price from products;`
