@@ -15,6 +15,11 @@
 
 
 
+**MySQL下载地址**
+**https://www.mysql.com/downloads/**
+**样例表下载地址**
+**https://forta.com/books/0672327120/**
+
 # 第4章 检索数据
 ## 4.1 selcet语句
 ## 4.2 检索单个列
@@ -312,7 +317,7 @@ from products;
 ## 13.2 创建分组
 `select vend_id,count(*) as num_prods from products group by vend_id;`
 
-# 13.3 过滤分组
+## 13.3 过滤分组
 
 `select cust_id,count(*) as orders from orders group by cust_id having count(*) >= 2;`
 
