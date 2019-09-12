@@ -350,3 +350,50 @@ from products;
        having        组级过滤                     否
        order by      输出排序顺序                  否
        limit         要检索的行数                  否
+
+# 第14章  使用子查询
+
+## 14.1 子查询
+* select语句是sql的查询。迄今为止我们所看到的所有select语句都是简单的查询，即从单个数据库表中检索数据的单条语句
+* 查询(query) 任何sql语句都是查询。但此术语一般指select语句。
+## 14.2 利用子查询进行过滤
+
+`select order_num from orderitems where prod_id = 'TNT2';`
+
+`select cust_id from orders where order_num in (20005,20007);`
+
+`select cust_id from orders where order_num in (select order_num from orderitems where prod_id = 'TNT2');`
+
+`select cust_name,cust_contact from customers where cust_id in (10001,10004);`
+
+`select cust_name,cust_contact from customers where cust_id in (select cust_id from orders where order_num in (select order_num from orderitems where prod_id = 'TNT2'));`
+
+* 这里给出的代码有效并获得所需的结果。但是，使用子查询并不总是执行这种类型的数据检索的最有效的方法。更多的
+论述，请参考第15章，其中将再次给出这个例子。
+
+## 14.3 作为计算字段使用子查询
+`select cust_name,cust_state,(select count(*) from orders where orders.cust_id = customers.cust_id) as orders  from customers order by cust_name;`
+
+# 第15章 联结表
+
+## 15.1 联结
+### 15.1.1 关系表
+### 15.1.2 为什么使用联结
+## 15.2 创建联结
+### 15.2.1 where子句的重要性
+### 15.2.2 内部联结
+### 15.2.3 联结多个表
+
+## 15.3 小结
+
+# 第16章 创建高级联结
+
+## 16.1 使用表别名
+## 16.2 使用不同类型的联结
+### 16.2.1 自联结
+### 16.2.2 自然联结
+### 16.2.3 外部联结
+
+## 16.3 使用带聚集函数的联结
+## 16.4 使用联结和联结条件
+
