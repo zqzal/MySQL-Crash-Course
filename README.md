@@ -3,8 +3,14 @@
 
 **读《MySQL必知必会》遇到的问题一(环境问题以及数据源问题)**
 **https://mp.weixin.qq.com/s/GhrZ3aq3bgX51ZT5kBA5Hg**
-[微信公众号](https://mp.weixin.qq.com/s/GhrZ3aq3bgX51ZT5kBA5Hg)
+**一起学习**
+
+
+
 ![扫一扫](https://mp.weixin.qq.com/mp/qrcode?scene=10000004&size=102&__biz=MzI5NjY2Nzk1MQ==&mid=2247483654&idx=1&sn=59305dd60579cf8e10a6c11c3293a559&send_time= "你一关注我就更来劲了!")
+
+
+
 # 第4章 检索数据
 ## 4.1 selcet语句
 ## 4.2 检索单个列
