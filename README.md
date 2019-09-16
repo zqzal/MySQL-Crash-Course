@@ -424,8 +424,51 @@ from products;
 # 第16章 创建高级联结
 
 ## 16.1 使用表别名
+
+`select concat(RTrim(vend_name),' (',RTrim(vend_country),')') as vend_title from vendors order by vend_name;`
+
+* 别名除了用于列名和计算字段外，sql还允许给表名起别名。这样做有两个主要理由
+1. 缩短sql语句
+2. 允许在单条select语句中多次使用相同的表
+
+`select cust_name,cust_contact from customers as c, orders as o, orderitems as oi where c.cust_id = o.cust_id and oi.order_num = o.order_num and prod_id = 'TNT2';`
+
 ## 16.2 使用不同类型的联结
+* 迄今为止，我们使用的只是称为内部联结或等值联结（equijoin）的简单联结。现在来看3种其他联结，它们分别是自联结、自然联结和外部联结。
 ### 16.2.1 自联结
+
+`select prod_id,prod_name from products where vend_id = (select vend_id from products where prod_id = 'DTNTR');`
+
+(```)
++---------+----------------+
+| prod_id | prod_name      |
++---------+----------------+
+| DTNTR   | Detonator      |
+| FB      | Bird seed      |
+| FC      | Carrots        |
+| SAFE    | Safe           |
+| SLING   | Sling          |
+| TNT1    | TNT (1 stick)  |
+| TNT2    | TNT (5 sticks) |
++---------+----------------+
+(```)
+
+`select p1.prod_id,p1.prod_name from products as p1,products as p2 where p1.vend_id = p2.vend_id and p2.prod_id = 'DTNTR';`
+
+(```)
++---------+----------------+
+| prod_id | prod_name      |
++---------+----------------+
+| DTNTR   | Detonator      |
+| FB      | Bird seed      |
+| FC      | Carrots        |
+| SAFE    | Safe           |
+| SLING   | Sling          |
+| TNT1    | TNT (1 stick)  |
+| TNT2    | TNT (5 sticks) |
++---------+----------------+
+(```)
+
 ### 16.2.2 自然联结
 ### 16.2.3 外部联结
 
