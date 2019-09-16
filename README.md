@@ -403,9 +403,23 @@ from products;
 * 应该保证where子句的正确性。不正确的过滤条件将导致mysql返回不正确的数据。
 
 ### 15.2.2 内部联结
+
+`select vend_name,prod_name,prod_price from vendors inner join products on vendors.vend_id = products.vend_id;`
+
 ### 15.2.3 联结多个表
 
+`select prod_name,vend_name,prod_price,quantity from orderitems,products,vendors where products.vend_id = vendors.vend_id and orderitems.prod_id = products.prod_id and order_nmu = 20005;`
+
+`select cust_name,cust_contact from customers where cust_id in (select cust_id from orders where order_num in (select order_num from orderitems where prod_id = 'TNT2'));`
+* 子查询并不总是执行复杂select操作的最有效的方法，下面是使用联结的相同查询：
+
+`select cust_name,cust_contact from customers,orders,orderitems where customers.cust_id = orders.cust_id and orderitems.order_num = orders.order_num and prod_id = 'TNT2';`
+
+
 ## 15.3 小结
+
+* 联结是sql中最重要最强大的特性，有效地使用联结需要对关系数据库设计有基本的了解。本章随着对联结的介绍讲述
+* 了关系数据库设计的一些基本知识，包括等值联结（也称为内部联结）这种最经常使用的联结形式。
 
 # 第16章 创建高级联结
 
