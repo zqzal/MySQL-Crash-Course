@@ -528,7 +528,16 @@ from products;
 ```
 
 ## 16.3 使用带聚集函数的联结
+`select customers.cust_name,customers.cust_id,count(orders.order_num) as num_ord from customers inner join orders on customers.cust_id = orders.cust_id group by customers.cust_id;`
+
+`select customers.cust_name,customers.cust_id,count(orders.order_num) as num_ord from customers left outer join orders on customers.cust_id = orders.cust_id group by customers.cust_id;`
+
 ## 16.4 使用联结和联结条件
+
+* 注意所使用的联结类型。一般我们使用内部联结，但使用外部联结也是有效的
+* 保证使用正确的联条件，否则将返回不正确的数据
+* 应该总是提供联结条件，否者会得出笛卡尔积
+* 在一个联结中可以包含多个表，甚至对于每个联结可以采用不同的联结类型。虽然这样做是合法的，一般也很有用，但应该在一起测试它们前，分别测试每个联结。这将使故障排除更为简单。
 
 # 第17章 组合查询
 
