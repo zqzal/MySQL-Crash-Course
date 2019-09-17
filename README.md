@@ -542,16 +542,39 @@ from products;
 # 第17章 组合查询
 
 ## 17.1 组合查询
+* 组合查询和多个where条件 ：多数情况下，组合相同表的两个查询完成的工作与具有多个where子句条件的单条查询完成的工作相同。换句话说，任何具有多个where子句的select语句都可以作为一个组合查询给出，在一下段落中可以看到这一点。这两种技术在不同的查询中性能也不同。因此，应该试一下这两种技术，以确定对特定的查询哪一种性能更好。
 
 ## 17.2 创建组合查询
 
-### 17.2.1 创建组合查询
+
+### 17.2.1 使用union
+
+`select vend_id,prod_id,prod_price from products where prod_price <= 5;`
+
+`select vend_id,prod_id,prod_price from products where vend_id in (1001,1002);`
+
+```
+select vend_id,prod_id,prod_price from products where prod_price <= 5 
+union
+select vend_id,prod_id,prod_price from products where vend_id in (1001,1002);
+```
+`select vend_id,prod_id,prod_price from products where prod_price <=5 or vend_id in (1001,1002);`
 
 ### 17.2.2 union规则
 
+* union必须由两条或两条以上的select语句组成，语句之间用关键字union分隔（因此，如果组合4条select语句，将要使用3个union关键字）
+* union中的每个查询必须包含相同的列、表达式或聚集函数（不过各个列不需要以相同的次序列出）
+* 列数据类型必须兼容：类型不必完全相同，但必须是DBMS可以隐含地转换的类型（例如，不同的数值类型或不同的日期类型）
+
 ### 17.2.3 包含或取消重复行
 
+`select vend_id,prod_id,prod_price from products where prod_price <=5 union all select vend_id,prod_id,prod_price from products where vend_id in (1001,1002);`
+
+* union与where ： union几乎总是完成与多个where条件相同的工作。union all为union的一种形式，它完成wherei子句完成不了的工作。如果确实需要每个条件的匹配行全部出现（包括重复行），则必须使用union all 而不是where
+
 ### 17.2.4 对组合查询结果排序
+
+`select vend_id,prod_id,prod_price from products where prod_price <= 5 union select vend_id,prod_id,prod_price from products where vend_id in (1001,1002) order by vend_id,prod_price;`
 
 ## 17.3 小结
 
