@@ -439,7 +439,7 @@ from products;
 
 `select prod_id,prod_name from products where vend_id = (select vend_id from products where prod_id = 'DTNTR');`
 
-(```)
+```
 +---------+----------------+
 | prod_id | prod_name      |
 +---------+----------------+
@@ -451,11 +451,11 @@ from products;
 | TNT1    | TNT (1 stick)  |
 | TNT2    | TNT (5 sticks) |
 +---------+----------------+
-(```)
+```
 
 `select p1.prod_id,p1.prod_name from products as p1,products as p2 where p1.vend_id = p2.vend_id and p2.prod_id = 'DTNTR';`
 
-(```)
+```
 +---------+----------------+
 | prod_id | prod_name      |
 +---------+----------------+
@@ -467,7 +467,7 @@ from products;
 | TNT1    | TNT (1 stick)  |
 | TNT2    | TNT (5 sticks) |
 +---------+----------------+
-(```)
+```
 
 ### 16.2.2 自然联结
 ### 16.2.3 外部联结
