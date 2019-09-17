@@ -303,13 +303,13 @@ like匹配整个串而regexp匹配子串
 `select avg(distinct prod_price) as avg_price from products where vend_id = 1003;`
 
 ## 12.3 组合聚集函数
-(```)
+```
 select count(*) as num_items,
           min(prod_price) as price_min,
           max(prod_price) as price_max,
           avg(prod_price) as price_avg
 from products;
-(```)
+```
 # 第13章  分组数据
 
 ## 13.1 数据分组
