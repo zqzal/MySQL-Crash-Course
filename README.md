@@ -485,7 +485,47 @@ from products;
 
 ### 16.2.3 外部联结
 
+`select customers.cust_id,orders.order_num from customers inner join orders on customers.cust_id = orders.cust_id;`
 
+```
++---------+-----------+
+| cust_id | order_num |
++---------+-----------+
+|   10001 |     20005 |
+|   10001 |     20009 |
+|   10003 |     20006 |
+|   10004 |     20007 |
+|   10005 |     20008 |
++---------+-----------+
+```
+`select customers.cust_id,orders.order_num from customers left outer join orders on customers.cust_id = orders.cust_id;`
+
+```
++---------+-----------+
+| cust_id | order_num |
++---------+-----------+
+|   10001 |     20005 |
+|   10001 |     20009 |
+|   10002 |      NULL |
+|   10003 |     20006 |
+|   10004 |     20007 |
+|   10005 |     20008 |
++---------+-----------+
+```
+
+`select customers.cust_id,orders.order_num from customers right outer join orders on orders.cust_id = customers.cust_id;`
+
+```
++---------+-----------+
+| cust_id | order_num |
++---------+-----------+
+|   10001 |     20005 |
+|   10001 |     20009 |
+|   10003 |     20006 |
+|   10004 |     20007 |
+|   10005 |     20008 |
++---------+-----------+
+```
 
 ## 16.3 使用带聚集函数的联结
 ## 16.4 使用联结和联结条件
