@@ -587,6 +587,10 @@ select vend_id,prod_id,prod_price from products where vend_id in (1001,1002);
 
 ### 18.2.2 进行全文搜索
 
+`select note_text from productnotes where match(note_text) against('rabbit');`
+
+`select note_text from productnotes where note_text like '%rabbit%';`
+
 ### 18.2.3 使用查询扩展
 
 ### 18.2.4 布尔文本搜索
@@ -598,7 +602,66 @@ select vend_id,prod_id,prod_price from products where vend_id in (1001,1002);
 # 第19章 插入数据
 
 ## 19.1 数据插入
+
+* 插入完成的行
+* 插入行的一部分
+* 插入多行 
+* 插入某些查询的结果
+
 ## 19.2 插入完整的行
+```
+insert into customers values(NULL,
+'Pep E. LaPew',
+'100 Main Street',
+'Los Angeles',
+'CA',
+'90046',
+'USA',
+NULL,
+NULL);
+```
+
+```
+insert into customers(cust_name,
+cust_address,
+cust_city,
+cust_state,
+cust_zip,
+cust_country,
+cust_contact,
+cust_email) 
+values('Pep E. LaPew',
+'100 Main Street',
+'Los Angeles',
+'CA',
+'90046',
+'USA',
+NULL,
+NULL);
+```
+
+```
+insert into customers(cust_name,
+cust_contact,
+cust_email,
+cust_address,
+cust_city,
+cust_state,
+cust_zip,
+cust_country) 
+values('Pep E.LaPew',
+NULL,
+NULL,
+'100 Main Street',
+'Los Angeles',
+'CA',
+'90046',
+'USA');
+```
+
+* 一般不要使用没有明确给出列的列表的insert语句。使用列的列表能使sql代码继续发挥作用，即使表结构发生了变化
+
+
 ## 19.3 插入多个行
 ## 19.4 插入检索出的数据
 ## 19.5 小结
