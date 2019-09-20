@@ -679,8 +679,30 @@ NULL,
 
 # 第20章 更新和删除数据
 ## 20.1 更新数据
+
+* update语句由3部分组成，分别是
+1. 要更新的表
+2. 列名和它们的新值
+3. 确定要更新行的过滤条件
+
+`update customers set cust_email = 'elmer@fudd.com' where cust_id = 10005;`
+
+`update customers set cust_name = 'The Fudds',cust_email = 'elmer@fudd.com' where cust_id = 10005;`
+
+`update customers set cust_email = NULL where cust_id = 10005;`
+
 ## 20.2 删除数据
+* 两种方式使用Delete
+1. 从表中删除特定的行
+2. 从表中删除所有行
+
+`delete from customers where cust_id = 10006;`
+
+* truncate table 语句 删除所有行
+
 ## 20.3 更新和删除的指导原则
+
+
 ## 20.4 小结
 
 # 第21章 创建和操作表
