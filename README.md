@@ -663,7 +663,18 @@ NULL,
 
 
 ## 19.3 插入多个行
+
+`insert into customers(cust_name,cust_address,cust_city,cust_state,cust_zip,cust_country) values('Pep E. LaPew','100 Main Street','Los Angeles','CA','90046','USA'); insert into customers(cust_name,cust_address,cust_city,cust_state,cust_zip,cust_country) values('M. Martain','42 Galaxy Way','New York','NY','11213','USA');`
+
+
+`insert into customers(cust_name,cust_address,cust_city,cust_state,cust_zip,cust_country) values('Pep E. LaPew','100 Main Street','Los Angeles','CA','90046','USA'),('M. MARTIAN','42 Galaxy Way','New York','NY','11213','USA');`
+
+* 提高insert的性能：此技术可以提高数据库处理的性能，因为mysql用单条insert语句处理多个插入比使用多条insert语句快。
+
 ## 19.4 插入检索出的数据
+
+`insert into customers(cust_id,cust_name,cust_address,cust_city,cust_state,cust_zip,cust_country) select cust_id,cust_name,cust_address,cust_city,cust_state,cust_zip,cust_country from custnew;`
+
 ## 19.5 小结
 
 # 第20章 更新和删除数据
