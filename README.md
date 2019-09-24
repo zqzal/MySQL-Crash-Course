@@ -714,8 +714,20 @@ NULL,
 ### 21.1.5 指定默认值
 ### 21.1.6 引擎类型
 ## 21.2 更新表
+
+`alter table vendors add vend_phone CHAR(20);`
+
+`alter table vendors drop column vend_phone;`
+
+
 ## 21.3 删除表
+
+`drop table customers2;`
+
 ## 21.4 重命名表
+
+`rename table customer2 to customers;`
+
 ## 21.5 小结
 
 # 第22章 使用视图
