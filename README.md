@@ -731,16 +731,49 @@ NULL,
 ## 21.5 小结
 
 # 第22章 使用视图
+* 本章将介绍视图究竟是什么，它们怎样工作，何时使用它们。我们还将看到如何利用视图简化前面章节中执行的某些sql操作。
+
+
 ## 22.1 视图
+* 视图是虚拟的表。与包含数据的表不一样，视图只包含使用时动态检索数据的查询。
+
+`select cust_name,cust_contact from customers,orders,orderitems where customers.cust_id = orders.cust_id and orderitems.order_num = orders.order_num and prod_id = 'TNT2';`
+
+`select cust_name,cust_contact from productcustomers where prod_id = 'TNT2';`
+
 ### 22.1.1 为什么使用视图
 ### 22.1.2 视图的规则和限制
 ## 22.2 使用视图
 ### 22.2.1 利用视图简化复杂的联结
+`create view productcustomers as select cust_name,cust_contact,prod_id from customers,orders,orderitems where customers.cust_id = orders.cust_id and orderitems.order_num = orders.order_num;`
+
+`select * from productcustomers;`
+
+`select cust_name,cust_contact from productcustomers where prod_id = 'TNT2';`
+
 ### 22.2.2 用视图重新格式化检索出的数据
+
+`select concat(RTrim(vend_name),' (',RTrim(vend_country),')') as vend_title from vendors order by vend_name;`
+
+`create view vendorlocations as select concat(RTrim(vend_name),' (',RTrim(vend_country),')') as vend_title from vendors order by vend_name;`
+
 ### 22.2.3 用视图过滤不想要的数据
+
+`create view customeremaillist as select cust_id,cust_name,cust_email from customers where cust_email is not NULL;`
+
+`select * from customeremaillist;`
+
 ### 22.2.4 使用视图与计算字段
+`select prod_id,quantity,item_price,quantity*item_price as expanded_price from orderitems where order_num = 20005;`
+
+`create view orderitemsexpanded as select prod_id,quantity,item_price,quantity*item_price as expanded_price from orderitems;`
+
+`select * from orderitemsexpanded where order_num = 20005;`
+
 ### 22.2.5 更新视图
 ## 22.3 小结
+
+* 视图为虚拟的表。它们包含的不是数据而是根据需要检索数据的查询。视图提供了一种mysql的select语句层次的封装，可用来简化数据处理以及重新格式化基础数据或保护基础数据。
 
 # 第23章 使用存储过程
 ## 23.1 存储过程
