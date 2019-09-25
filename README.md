@@ -777,12 +777,58 @@ NULL,
 
 # 第23章 使用存储过程
 ## 23.1 存储过程
+* 可以创建存储过程。存储过程简单来说，就是为以后的使用而保存的一条或多条mysql语句的集合。可将其视为批文件，虽然它们的作用不仅限于批处理。
 ## 23.2 为什么使用存储过程
 ## 23.3 使用存储过程
+
 ### 23.3.1 执行存储过程
+`call productpricing(@pricelow,@pricehigh,@priceverage);`
 ### 23.3.2 创建存储过程
+* 先执行
+```
+delimiter //
+creater procedure productpricing()
+begin
+select avg(prod_price) as priceaverage
+from products;
+end
+//
+```
+* 然后在执行`DELIMITER ;` 
+* 知识点:  delimiter //    #修改命令终止符为//（random）
+* 修改完之后 在执行 （`DELIMITER ;`）把命令终止符改成 ';' 
+* 最后执行存储过程 `call productpricing();`
+* 记的下面创建的存储过程  先执行#修改命令终止符
+
 ### 23.3.3 删除存储过程
+`drop procedure productpricing;`
 ### 23.3.4 使用参数
+```
+delimiter //
+create procedure productpricing(
+out pl decimal(8,2),
+out ph decimal(8,2),
+out pa decimal(8,2)
+)
+begin 
+select min(prod_price)
+into pl
+from products;
+select max(prod_price)
+into ph
+from products;
+select avg(prod_price)
+into pa
+from products;
+end
+//
+```
+* 然后执行 `delimiter ;`
+
+`call productpricing(@pricelow,@pricehigh,@priceaverage);`
+
+`select @pricehigh,@pricelow,@priceaverage;`
+
 ### 23.3.5 建立智能存储过程
 ### 23.3.6 检查存储过程
 ## 23.4 小结
