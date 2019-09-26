@@ -829,8 +829,114 @@ end
 
 `select @pricehigh,@pricelow,@priceaverage;`
 
+```
+delimiter //
+create procedure ordertotal(
+in onumber INT,
+out ototal decimal(8,2)
+)
+begin 
+select sum(item_price*quantity)
+from orderitems
+where order_num = onumber
+into ototal;
+end;
+//
+
+```
+` delimiter ;` (改回来)
+
+`call ordertotal(20005,@total);`
+
+`select @total;`
+* 输出
+```
++--------+
+| @total |
++--------+
+| 149.87 |
++--------+
+```
+
+
+`call ordertotal(20009,@total);`
+
+`select @total;`
+
+* 输出
+```
++--------+
+| @total |
++--------+
+|  38.47 |
++--------+
+```
+
 ### 23.3.5 建立智能存储过程
+
+`执行之前先删除 drop procedure ordertotal`
+
+```
+-- Name : ordertotal
+-- Parameters : onumber = order number
+--   taxable = 0 if not taxable, 1 if taxable
+--   ototal = order total variable
+create procedure ordertotal(
+in onumber INT,
+in taxable BOOLEAN,
+out ototal decimal(8,2)
+) comment 'Obtain order total,optionally adding tax'
+begin
+-- declare variable for total
+declare total decimal(8,2);
+-- declare tax percentage
+declare taxrate int default 6;
+-- Get the order total
+select sum(item_price*quantity)
+from orderitems
+where order_num = onumber
+into total;
+-- Is this taxable?
+if taxable then
+-- Yes,so add taxrate to the total
+select total+(total/100*taxrate) into total;
+end if;
+-- And finally,save to out variable
+select total into ototal;
+end;
+```
+`call ordertotal(20005,0,@total)`
+
+`select @total;`
+
+```
++--------+
+| @total |
++--------+
+| 149.87 |
++--------+
+```
+
+`call ordertotal(20005,1,@total);`
+
+`select @total;`
+
+```
++--------+
+| @total |
++--------+
+| 158.86 |
++--------+
+```
+
 ### 23.3.6 检查存储过程
+
+`show create procedure ordertotal;`
+
+`show procedure status;`
+
+`show procedure status like 'ordertotal';`
+
 ## 23.4 小结
 
 # 第24章 使用游标
