@@ -941,12 +941,60 @@ end;
 
 # 第24章 使用游标
 ## 24.1 游标
-
-## 24.2 使用游标
+* 只能用于存储过程
+## 24.2 使用游标 
 
 ### 24.2.1 创建游标
+```
+create procedure processorders()
+begin
+declare ordernumbers cursor
+for
+select order_num from orders;
+end;
+```
 ### 24.2.2 打开关闭游标
+
+`OPEN ordernumbers;`
+
+`CLOSE ordernumbers;`
+
+```
+create procedure processorders()
+begin
+
+declare ordernumbers cursor
+for
+select order_num from orders;
+
+open ordernumbers;
+
+close ordernumbers;
+end;
+```
+
 ### 24.2.3 使用游标数据
+```
+'--' 这里是注释 可以不用写(注意后面要有空格)
+```
+
+```
+create procedure processorders()
+begin
+-- Declare local variables
+declare o int;
+-- Declare the cursor
+declare ordernumbers cursor
+for
+select order_num from orders;
+-- Open the cursor
+open ordernumbers;
+-- Get order number
+fetch ordernumbers into o;
+-- Close ther cursor
+close ordernumbers;
+end;
+```
 
 # 第25章 使用触发器
 ## 25.1 触发器
